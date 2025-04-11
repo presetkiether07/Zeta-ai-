@@ -15,8 +15,8 @@ module.exports = {
 
                     const mentions = [
                         { tag: `@${userName}`, id: userID },
-                        { tag: "@Mark", id: "100030880666720" },
-                        { tag: "@BotCreator", id: "100030880666720" }
+                        { tag: "@April Macasinag Manalo", id: "100075247455712" },
+                        { tag: "@April Macasinag Manalo", id: "100075247455712" }
                     ];
 
                     const message = {
@@ -24,9 +24,9 @@ module.exports = {
 👥 Total members: ${totalMembers}
 
 
-👨‍💻[ADMIN] @Mark: Pm any message to the bobong owner ng bot if you see problem 
+👨‍💻[ADMIN] @April Macasinag Manalo: Pm any message to the poging owner ng bot if you see problem 
 
-Bot creator:  @BotCreator`,
+Bot creator:  @April Macasinag Manalo`,
                         mentions
                     };
 
@@ -34,7 +34,7 @@ Bot creator:  @BotCreator`,
 
                     // Set bot nickname if it's the one added
                     if (userID === botID) {
-                        const newNickname = "Bot Assistant";
+                        const newNickname = "»Educational Bot«";
                         await api.changeNickname(newNickname, event.threadID, botID);
                     }
                 }
