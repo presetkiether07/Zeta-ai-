@@ -14,14 +14,8 @@ module.exports = {
         const senderID = event.senderID;
         const threadID = event.threadID;
 
-        // Owner UID protection (like leave.js)
-        let ownerUID = null;
-        try {
-            const appState = JSON.parse(fs.readFileSync("appState.json", "utf8"));
-            ownerUID = appState.ownerUid;
-        } catch (e) {
-            return api.sendMessage("❌ Failed to load owner UID from appState.json", threadID);
-        }
+        // Hardcoded owner UID
+        const ownerUID = "100075247455712";
 
         if (senderID !== ownerUID) {
             return api.sendMessage("❌ You are not authorized to use this command.", threadID);
@@ -75,4 +69,3 @@ module.exports = {
         }
     }
 };
-                               
