@@ -23,19 +23,23 @@ module.exports = {
                 }
             }
 
-            const loadingMsg = await api.sendMessage("🧠 Gemini is thinking...", threadID);
+            // Show typing indicator
+            api.sendTypingIndicator(threadID, true);
 
             const response = await axios.get(apiUrl);
             const description = response?.data?.data?.description;
 
+            // Stop typing indicator before sending the response
+            api.sendTypingIndicator(threadID, false);
+
             if (description) {
-                return api.sendMessage(`🤖 **Gemini**\n━━━━━━━━━━━━━━━━\n${description}\n━━━━━━━━━━━━━━━━`, threadID, loadingMsg.messageID);
+                return api.sendMessage(`━━━━━━━━━━━━━━━━\n${description}\n━━━━━━━━━━━━━━━━`, threadID);
             }
 
-            return api.sendMessage("⚠️ No description found in response.", threadID, loadingMsg.messageID);
+            return api.sendMessage("⚠️ No description found in response.", threadID);
         } catch (error) {
-            console.error("❌ Gemini Error:", error);
-            return api.sendMessage("❌ Error while contacting Gemini API.", event.threadID);
+            console.error("❌ AI Command Error:", error);
+            return api.sendMessage("❌ Error while contacting AI API.", event.threadID);
         }
     }
 };
