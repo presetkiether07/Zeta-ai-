@@ -1,8 +1,8 @@
 module.exports = {
     name: "pce",
-    description: "Send group rules and regulations.",
+    description: "Send group rules and regulations temporarily.",
     usage: "pce",
-    version: "1.0",
+    version: "1.1",
     cooldown: 5,
     admin: false,
 
@@ -30,13 +30,21 @@ RULES AND REGULATIONS👇
 📍 *Other rules will be added as soon as I can* 📍
         `;
 
-        api.sendMessage(rules, event.threadID, (err, info) => {
-            if (!err) {
-                // React to the message after sending
-                api.setMessageReaction("👍", info.messageID, (err) => {
-                    if (err) console.error("❌ Failed to react to the message:", err);
-                }, true);
-            }
-        }, event.messageID);
+        // React to the trigger message
+        api.setMessageReaction("✅", event.messageID, (err) => {
+            if (err) console.error("❌ Failed to react:", err);
+        }, true);
+
+        // Send the rules and unsend after 60 seconds
+        api.sendMessage(rules, event.threadID, (err, messageInfo) => {
+            if (err) return console.error("❌ Failed to send rules:", err);
+
+            // Set timeout to unsend
+            setTimeout(() => {
+                api.unsendMessage(messageInfo.messageID, (unsendErr) => {
+                    if (unsendErr) console.error("❌ Failed to unsend rules:", unsendErr);
+                });
+            }, 60000); // 60,000 ms = 60 seconds
+        });
     }
 };
