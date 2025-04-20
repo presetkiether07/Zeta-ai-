@@ -1,14 +1,12 @@
 module.exports = {
-  config: {
     name: "list",
-    aliases: ["list"],
-    version: "1.0",
-    author: "April Manalo",
-    countDown: 5,
-    role: 0,
-    shortDescription: "Show group members",
-    longDescription: "Displays a numbered list of all members in the group chat.",
-    category: "group",
+    author: "april",
+    description: "showing member list.",
+    usage: "list",
+    version: "1.1",
+    cooldown: 5,
+    admin: false,
+ category: "group",
     guide: {
       en: "{pn}"
     }
